@@ -4,6 +4,8 @@
 // init project
 var express = require('express');
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -14,6 +16,11 @@ app.use(express.static('public'));
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', function (socket) {
+  console.log("Somebody connected via Websockets!");
+  // Write your code here
 });
 
 // listen for requests :)
