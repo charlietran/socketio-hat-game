@@ -5,7 +5,7 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var io = require('socket.io');
+var io = require('socket.io')(http);
 app.use(express.static('public'));
 
 app.get('/', function(request, response) {
@@ -14,12 +14,11 @@ app.get('/', function(request, response) {
 });
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
+app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
 
-io.listen(listener);
 io.on('connection', function (socket) {
   console.log("Somebody connected via Websockets!");
   // Write your code here
