@@ -6,17 +6,20 @@ console.log('hi');
 
 
 var socket = io();
+var username = '';
 
 $(function () {
   $('form#newUser').submit(function(){
-    socket.emit('new user', $('#u').val());
+    username = $('#u').val();
+    socket.emit('new user', username);
+    $('form#newUser').hide();
     return false;
   });
   
   $('form#message').submit(function(){
     var msg={};
     msg.text=$('#m').val();
-    msg.user=$('#u').val();
+    msg.user=username;
     socket.emit('chat message', msg);
     $('#m').val('');
     return false;
