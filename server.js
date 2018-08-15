@@ -4,8 +4,10 @@
 // init project
 var express = require('express');
 var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
 app.use(express.static('public'));
 
 app.get('/', function(request, response) {
@@ -14,12 +16,14 @@ app.get('/', function(request, response) {
 });
 
 // listen for requests :)
-app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
+server.listen(process.env.PORT, function() {
+  //console.log('Your app is listening on port ' + listener.address().port);
 });
 
 
 io.on('connection', function (socket) {
   console.log("Somebody connected via Websockets!");
-  // Write your code here
+  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+  });
 });
