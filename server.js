@@ -21,10 +21,19 @@ server.listen(process.env.PORT, function() {
 });
 
 
+var users=[];
+
 io.on('connection', function (socket) {
   console.log("Somebody connected via Websockets!");
+
+  socket.on('new user', function(username){
+    console.log('new user: ' + username);
+    users.push(username);
+    io.emit('user joined: ' + username);
+  });
+  
   socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
+    //console.log('message: ' + msg.txt);
     io.emit('display message', msg);
   });
 });
