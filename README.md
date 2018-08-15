@@ -1,69 +1,37 @@
-# NodeJS Online Game Template
+Welcome to Glitch
+=================
 
-Barebone NodeJS project for any multiplayer games.
+Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
 
----
+**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
 
-**UPDATE:** I developed a [lightweight alternative for Socket.IO](https://github.com/huytd/lit), based on Engine.IO, the engine behind Socket.IO as well. It focus on transmiting binary data instead of string-based as in Socket.IO, so the target is to improve the networking performance. Unfortunatelly, I didn't have time for testing/integrating it yet. It would be nice if somebody can help me integrate it with this repo? Feel free to contact me for further discussion. Thank you so much!
-
----
-
-## Requirements
-- NodeJS / NPM
-- Socket.IO
-- ExpressJS
-
-## Getting started
-- Clone the source code from Github
-- Run `npm install` to install needed packages
-- Writing your code in `server/server.js` and `client/js/game.js`
-- Run your game server with `npm start` command
-
-## Server side
-You can write all the server side code in `server/server.js`
-
-```
-io.on('connection', function (socket) {
-  console.log("Somebody connected!");
-  // Write your code here
-});
-```
-
-## Client side
-For writing client side code, find `client/js/game.js`
-
-There are 3 method to process your client logic: `handleNetwork`, `handleLogic` and `handleGraphics`
-
-`handleNetwork` is where you receive and process all messages sent from Server:
-
-```
-Game.prototype.handleNetwork = function(socket) {
-  console.log('Game connection process here');
-  console.log(socket);
-  // This is where you receive all socket messages
-}
-```
-
-The `socket` is the connection object of your game client, use this to communicate with the server.
+Find out more [about Glitch](https://glitch.com/about).
 
 
-`handleLogic` is where you update your game logic (handling input, update game information,...)
+Your Project
+------------
 
-```
-Game.prototype.handleLogic = function() {
-  console.log('Game is running');
-  // This is where you update your game logic
-}
-```
+### ← README.md
 
-`handleGraphics` is where you draw your game:
+That's this file, where you can tell people what your cool website does and how you built it.
 
-```
-Game.prototype.handleGraphics = function(gfx) {
-  // This is where you draw everything
-}
-```
+### ← index.html
 
-## License
+Where you'll write the content of your website. 
 
-This project is licensed under the terms of the MIT license. You can read the full license in `LICENSE.md`
+### ← style.css
+
+CSS files add styling rules to your content.
+
+### ← script.js
+
+If you're feeling fancy you can add interactivity to your site with JavaScript.
+
+### ← assets
+
+Drag in `assets`, like images or music, to add them to your project
+
+Made by [Fog Creek](https://fogcreek.com/)
+-------------------
+
+\ ゜o゜)ノ
