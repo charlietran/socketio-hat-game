@@ -13,5 +13,10 @@ $(function () {
     $('#m').val('');
     return false;
   });
+  
+  socket.on('display message', function(msg){
+      $('#messages').append($('<li>').text(msg));
+    });
+  
 });
 

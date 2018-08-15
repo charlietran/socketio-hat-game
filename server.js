@@ -25,5 +25,7 @@ io.on('connection', function (socket) {
   console.log("Somebody connected via Websockets!");
   socket.on('chat message', function(msg){
     console.log('message: ' + msg);
+    io.emit('display message', msg);
   });
 });
+
