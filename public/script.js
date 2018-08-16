@@ -32,5 +32,12 @@ $(function () {
         text(display));
     });
   
+    socket.on('user joined', function(user){
+      var display = user;
+      $('#users').
+        append($('<li>').
+        text(display));
+    });
+  
 });
 
