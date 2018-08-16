@@ -36,7 +36,7 @@ function broadcastMessages(messages) {
 function gameSetup(){
   for (var key in users) {
     if (users.hasOwnProperty(key)) {
-        
+        users[key]['color'] = floor(Math.random()
     }
   }
 }
