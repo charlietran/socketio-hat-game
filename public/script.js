@@ -9,6 +9,10 @@ var socket = io();
 var username = '';
 
 $(function () {
+
+  
+  $.cookie('userID',btoa(Math.random()).substr(5,10));
+  
   $('form#new-user').submit(function(){
     username = $('#u').val();
     socket.emit('new user', username);
