@@ -10,6 +10,22 @@ var user={};
 var users={};
 var game_data={};
 
+function updateUserList() {
+  var content='';
+  for (var key in users) {
+    if (users.hasOwnProperty(key)) {
+      var klass = users[key].color==0 && 'black' || 'white';
+      if (game_data.started && key==user.ID) {
+        content+=`<li id="user-${users[key].ID}">${users[key].name}<a id="guess_white">guess white</a><a id="guess_black">guess black</a><a id="guess_pass">pass</a></li>`; 
+      } else {
+        content+=`<li class="${klass}" id="user-${users[key].ID}">${users[key].name}</li>`; 
+      }
+    }
+
+  }
+  $('#users').html(content);
+}
+
 function updateGameData(d,u){
   console.log('updateGameData');
   console.log(d);
@@ -45,6 +61,7 @@ function updateGameData(d,u){
     $('form#begin-game').hide();
     $('form#message').hide();
   }
+
 }
 
 function getCookieValue(a) {
@@ -88,18 +105,7 @@ $(function () {
       $('form#message').show();
     }
     
-    var content='';
-    for (var key in users) {
-      if (users.hasOwnProperty(key)) {
-        if (game_data.started && key==user.ID) {
-          content+=`<li id="user-${users[key].ID}">${users[key].name}<a id="guess_white"/><a id="guess_whi"/></li>`; 
-        } else {
-          content+=`<li id="user-${users[key].ID}">${users[key].name}</li>`; 
-        }
-      }
-      
-    }
-    $('#users').html(content);
+    updateUserList();
   });
   
   $('form#new-user').submit(function(){
