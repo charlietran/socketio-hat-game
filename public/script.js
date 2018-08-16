@@ -42,6 +42,12 @@ $(function () {
   
   socket.on('begin game', function(){
     $('#messages').hide()
+    $('form#message').hide()
   });
+  
+  $('form#beginGame').submit(function(){
+    socket.emit('begin game');
+  });
+  
 });
 
