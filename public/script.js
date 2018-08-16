@@ -32,11 +32,12 @@ $(function () {
         text(display));
     });
   
-    socket.on('user joined', function(user){
-      var display = user;
-      $('#users').
+    socket.on('list users', function(users){
+      users.forEach(function(user) {
+        $('#users').
         append($('<li>').
-        text(display));
+        text(user));
+      }
     });
   
 });

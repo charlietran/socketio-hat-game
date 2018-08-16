@@ -23,15 +23,19 @@ server.listen(process.env.PORT, function() {
 
 var users=[];
 
+function broadcastUsers(users) {
+  io.emit('list users', users);
+}
+
 io.on('connection', function (socket) {
   console.log("Somebody connected via Websockets!");
-  
-  io.emit
+  broadcastUsers(users);
 
   socket.on('new user', function(username){
     console.log('new user: ' + username);
     users.push(username);
-    io.emit('user joined' + username);
+    io.emit('user joined', username);
+    broadcastUsers(users);
   });
   
   socket.on('chat message', function(msg){
