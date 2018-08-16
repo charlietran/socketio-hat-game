@@ -17,12 +17,12 @@ function updateGameData(d,u){
   if (game_data.started){
     $('form#begin-game').hide();
   } else {
-    $('form#begin-game').show();
+
   }
 }
 $(function () {
 
-  $('form#message').hide();
+  $('#message_container').hide();
   $('form#begin-game').hide();
   
   
@@ -31,12 +31,16 @@ $(function () {
     document.cookie = btoa(Math.random()).substr(5,10);
   }
   var userID = document.cookie
+  
   socket.emit('user connected', userID, function(u){
     users=u;
   });
   
+  console.log("user");
+  console.log(users[userID]);
+  
   if (users[userID]) {
-    $('form#message').show();
+    $('#message_container').show();
     $('form#begin-game').show();
   }
 
