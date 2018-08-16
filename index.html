@@ -29,7 +29,7 @@
         border: 1px #000 solid;
         border-radius: 3px;
         background: #ddd;
-        height: 50px;
+        height: 60px;
         text-align: center;
         position:relative;
       }
@@ -49,9 +49,13 @@
         padding: 15px;
       }
       
-      #guess_white{position:absolute; right:-5px; bottom:-5px; display: block;width:15px; height: 5px;}
-      #guess_black{position:absolute; right:-5px; bottom:0px;display: block;width:15px; height: 5px;}
-      #guess_pass{position:absolute; right:-5px; bottom:5px;display: block;width:15px; height: 5px;}
+      #users li a {
+        font-size: 0.8em;
+        text-decoration: underline;
+      }
+      #guess_white{position:absolute; right:-100px; top:0; display: block; width:100px; height: 20px;}
+      #guess_black{position:absolute; right:-100px; top:1em;display: block; width:100px; height: 20px;}
+      #guess_pass{position:absolute; right:-100px; top:2em;display: block; width:100px; height: 20px;}
     </style>
   </head>  
   <body>

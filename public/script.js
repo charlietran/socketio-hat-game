@@ -14,9 +14,15 @@ function updateUserList() {
   var content='';
   for (var key in users) {
     if (users.hasOwnProperty(key)) {
-      var klass = users[key].color==0 && 'black' || 'white';
+      var klass="";
+      if(users[key].color==0) {
+        klass='black';
+      } else if (users[key].color==1) {
+        klass='white';
+      }
+      
       if (game_data.started && key==user.ID) {
-        content+=`<li id="user-${users[key].ID}">${users[key].name}<a id="guess_white">guess white</a><a id="guess_black">guess black</a><a id="guess_pass">pass</a></li>`; 
+        content+=`<li id="user-${users[key].ID}">${users[key].name}<a id="guess_white" href="#">guess white</a><a id="guess_black" href="#">guess black</a><a id="guess_pass" href="#">pass</a></li>`; 
       } else {
         content+=`<li class="${klass}" id="user-${users[key].ID}">${users[key].name}</li>`; 
       }
@@ -37,6 +43,8 @@ function updateGameData(d,u){
   if (game_data.started){
     $('form#begin-game').hide();
     $('form#message').hide();
+    
+    updateUserList();
     
     for (var key in users) {
       if (users.hasOwnProperty(key)) {
