@@ -25,7 +25,7 @@ function updateGameData(d,u){
     for (var key in users) {
       if (users.hasOwnProperty(key)) {
         var user_color=users[key].color;
-        if((users[key].ID != user.ID) && user_color) {
+        if((users[key].ID != user.ID) && user_color != undefined) {
           if (user_color==0) {
               $(`li#user-${users[key].ID}`).addClass('black');
           } else if (user_color==1) {
@@ -39,7 +39,6 @@ function updateGameData(d,u){
   } else {
     $('form#begin-game').show();
     $('form#message').show();
-
   }
   
   if(!user.ID) {
@@ -86,13 +85,19 @@ $(function () {
       user = users[userID];
       $('form#new-user').hide();
       $('form#begin-game').show();
+      $('form#message').show();
     }
     
     var content='';
     for (var key in users) {
       if (users.hasOwnProperty(key)) {
-             content+=`<li id="user-${users[key].ID}">${users[key].name}</li>`; 
+        if (game_data.started && key==user.ID) {
+          content+=`<li id="user-${users[key].ID}">${users[key].name}<a id="guess_white"/><a id="guess_whi"/></li>`; 
+        } else {
+          content+=`<li id="user-${users[key].ID}">${users[key].name}</li>`; 
+        }
       }
+      
     }
     $('#users').html(content);
   });
