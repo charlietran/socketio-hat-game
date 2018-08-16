@@ -21,6 +21,8 @@ server.listen(process.env.PORT, function() {
 });
 
 
+var game_started=false;
+
 var users={};
 function broadcastUsers(users) {
   io.emit('list users', users);
@@ -66,6 +68,11 @@ io.on('connection', function (socket) {
 
   socket.on('begin game', function(){
     io.emit('begin game');
+    game_started=true;
+  });
+  
+  socket.on('game status', function() {
+    
   });
   
   
