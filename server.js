@@ -36,7 +36,10 @@ function broadcastMessages(messages) {
 function gameSetup(){
   for (var key in users) {
     if (users.hasOwnProperty(key)) {
-        users[key]['color'] = floor(Math.random()
+/*      game_data[key] = {
+        'ID'    :  key,
+        'color' :  Math.floor( 2*Math.random() )
+      } */
     }
   }
 }
@@ -48,7 +51,6 @@ io.on('connection', function (socket) {
     socket.userID=userID;
     callback(users);
   });
-  
   
   broadcastUsers(users);
   broadcastMessages(messages);
@@ -78,9 +80,9 @@ io.on('connection', function (socket) {
   socket.on('begin game', function(){
     io.emit('begin game');
     game_data.started=true;
-    gameSetup()
+    //gameSetup()
+    console.log( game_data )
   });
-  
 
   socket.on('get_game_data', function (callback) {
     callback(game_data,users);

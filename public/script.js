@@ -20,12 +20,11 @@ function updateGameData(d,u){
 
   }
 }
+
 $(function () {
 
   $('#message_container').hide();
   $('form#begin-game').hide();
-  
-  
   
   if (document.cookie == ''){
     document.cookie = btoa(Math.random()).substr(5,10);
@@ -43,8 +42,6 @@ $(function () {
     }
   });
   
-
-
   socket.on('connect', function(){
     socket.emit('get_game_data', function(d,u){
       updateGameData(d,u);
