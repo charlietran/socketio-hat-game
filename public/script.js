@@ -19,6 +19,7 @@ function updateGameData(d,u){
   
   if (game_data.started){
     $('form#begin-game').hide();
+    $('form#message').hide();
     
     for (var key in users) {
       if (users.hasOwnProperty(key)) {
@@ -34,6 +35,8 @@ function updateGameData(d,u){
     }
     
   } else {
+    $('form#begin-game').show();
+    $('form#message').show();
 
   }
 }
@@ -44,8 +47,6 @@ function getCookieValue(a) {
 }
 
 $(function () {
-
-  $('#message_container').hide();
   
   if (getCookieValue("hatgame")==""){
     document.cookie = "hatgame=" + btoa(Math.random()).substr(5,10);
@@ -57,15 +58,12 @@ $(function () {
     console.log("received users");
     console.log(u);
     users=u;
-    
-    if (users[userID]) {
-      $('#message_container').show();
-    }
+
   });
   
   socket.on('connect', function(){
     socket.emit('get_game_data', function(d,u){
-      updateGameData(d,u);
+
     });
   });
   
@@ -80,7 +78,6 @@ $(function () {
     if (users[userID]) {
       user = users[userID];
       $('form#new-user').hide();
-      $('#message_container').show();
       $('form#begin-game').show();
     }
     
@@ -123,15 +120,9 @@ $(function () {
       $('#messages').html(content);
     });
   
-  socket.on('begin game', function(){
-    $('#m').hide();
-    $('form#message').hide();
-    $('form#begin-game').hide();
-  });
-  
   $('form#begin-game').submit(function(){
     socket.emit('begin game');
     return false;
   });
-  
+
 });

@@ -85,7 +85,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('get_game_data', function (callback) {
-    callback(game_data,users);
+    broadcastGameData()
   });
   
 });
