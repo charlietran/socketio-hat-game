@@ -36,12 +36,14 @@ function broadcastMessages(messages) {
   io.emit('display messages', messages);
 }
 
+function updateGameData(){
+  io.emit('game_update', d, u
+}
+
 function gameSetup(){
   for (var key in users) {
     if (users.hasOwnProperty(key)){
-      if (!(key in game_data.assignments)){
-        game_data.assignments[key] = Math.floor( 2*Math.random() )
-      }
+        users[key].color = Math.floor( 2*Math.random() )
     }
   }
 }
@@ -81,7 +83,7 @@ io.on('connection', function (socket) {
     io.emit('begin game');
     game_data.started=true;
     gameSetup()
-    console.log( game_data )
+    console.log( users )
   });
 
   socket.on('get_game_data', function (callback) {

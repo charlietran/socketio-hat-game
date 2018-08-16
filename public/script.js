@@ -59,6 +59,8 @@ $(function () {
     if (users[userID]) {
       user = users[userID];
       $('form#new-user').hide();
+      $('#message_container').show();
+      $('form#begin-game').show();
     }
     
     var content='';
