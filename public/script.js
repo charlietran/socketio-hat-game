@@ -9,10 +9,10 @@ var socket = io();
 var username = '';
 
 $(function () {
-  $('form#newUser').submit(function(){
+  $('form#new-user').submit(function(){
     username = $('#u').val();
     socket.emit('new user', username);
-    $('form#newUser').hide();
+    $('form#new-user').hide();
     return false;
   });
   
@@ -41,12 +41,14 @@ $(function () {
   });
   
   socket.on('begin game', function(){
-    $('#messages').hide()
-    $('form#message').hide()
+    $('#messages').hide();
+    $('form#message').hide();
+    $('form#begin-game').hide();
   });
   
-  $('form#beginGame').submit(function(){
+  $('form#begin-game').submit(function(){
     socket.emit('begin game');
+    return false;
   });
   
 });

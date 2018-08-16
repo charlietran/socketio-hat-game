@@ -29,6 +29,7 @@ function broadcastUsers(users) {
 
 io.on('connection', function (socket) {
   console.log("Somebody connected via Websockets!");
+  console.log(socket.id)
   broadcastUsers(users);
 
   socket.on('new user', function(username){
