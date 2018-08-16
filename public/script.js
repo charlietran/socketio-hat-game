@@ -10,8 +10,11 @@ var username = '';
 
 $(function () {
 
-  
-  $.cookie('userID',btoa(Math.random()).substr(5,10));
+  if (document.cookie == ''){
+    document.cookie = btoa(Math.random()).substr(5,10);
+  }
+  var userID = document.cookie
+  socket.emit('user connected', userID);
   
   $('form#new-user').submit(function(){
     username = $('#u').val();

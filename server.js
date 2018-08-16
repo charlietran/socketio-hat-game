@@ -28,13 +28,21 @@ function broadcastUsers(users) {
 }
 
 io.on('connection', function (socket) {
-  console.log("Somebody connected via Websockets!");
-  console.log(socket.id)
+
+  socket.on('user connected', function(userID){
+    console.log('userID: ', userID);
+    socket.userID=userID;
+  });
+  
+  
   broadcastUsers(users);
 
   socket.on('new user', function(username){
     console.log('new user: ' + username);
-    users.push(username);
+    users.push({
+      'ID'   : socket.userID, 
+      'name' : username
+    });
     io.emit('user joined', username);
     broadcastUsers(users);
   });
