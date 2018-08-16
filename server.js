@@ -42,6 +42,11 @@ io.on('connection', function (socket) {
     //console.log('message: ' + msg.txt);
     io.emit('display message', msg);
   });
+
+  socket.on('begin game', function(){
+    io.emit('begin game');
+  });
+  
   
 });
 

@@ -32,13 +32,16 @@ $(function () {
         text(display));
     });
   
-    socket.on('list users', function(users){
-      users.forEach(function(user) {
-        $('#users').
-        append($('<li>').
-        text(user));
-      }
-    });
+  socket.on('list users', function(users){
+    var content='';
+    users.forEach(function(user) {
+      content+='<li>'+user+'</li>';
+    })
+    $('#users').html(content);
+  });
   
+  socket.on('begin game', function(){
+    $('#messages').hide()
+  });
 });
 
