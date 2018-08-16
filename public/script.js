@@ -10,9 +10,9 @@ var user={};
 var users=[];
 var game_data={};
 
-function updateGameData(d){
+function updateGameData(d,u){
   game_data=d;
-  d.users=
+  users=u;
   
   if (game_data.started){
     $('form#begin-game').hide();
@@ -22,25 +22,38 @@ function updateGameData(d){
 }
 $(function () {
 
+  $('form#message').hide();
+  $('form#begin-game').hide();
+  
+  
+  
   if (document.cookie == ''){
     document.cookie = btoa(Math.random()).substr(5,10);
   }
   var userID = document.cookie
-  socket.emit('user connected', userID);
+  socket.emit('user connected', userID, function(u){
+    users=u;
+  });
+  
+  if (users[userID]) {
+    $('form#message').show();
+    $('form#begin-game').show();
+  }
 
   socket.on('connect', function(){
-    socket.emit('get_game_data', function(d){
-      updateGameData(d);
+    socket.emit('get_game_data', function(d,u){
+      updateGameData(d,u);
     });
   });
   
-  socket.on('game_update', function(d){
-    updateGameData(d);
+  socket.on('game_update', function(d,u){
+    updateGameData(d,u);
   });
   
   
-  socket.on('list users', function(users){
-    console.log(users);
+  socket.on('list users', function(u){
+    users=u;
+    
     if (users[userID]) {
       user = users[userID];
       $('form#new-user').hide();
@@ -72,7 +85,9 @@ $(function () {
   
   socket.on('display messages', function(messages){
       var content='';
+      
       messages.forEach(function(message){
+        console.log(message);
         content+= '<li>' +
                   message.user.name +
                   ': ' + 

@@ -21,7 +21,7 @@ server.listen(process.env.PORT, function() {
 });
 
 
-var game_started=false;
+var game_data={};
 
 var users={};
 function broadcastUsers(users) {
@@ -35,9 +35,10 @@ function broadcastMessages(messages) {
 
 io.on('connection', function (socket) {
 
-  socket.on('user connected', function(userID){
+  socket.on('user connected', function(userID, callback){
     console.log('userID: ', userID);
     socket.userID=userID;
+    callback(users);
   });
   
   
@@ -68,13 +69,13 @@ io.on('connection', function (socket) {
 
   socket.on('begin game', function(){
     io.emit('begin game');
-    game_started=true;
+    game_data.started=true;
   });
   
-  socket.on('game status', function() {
-    
+
+  socket.on('get_game_data', function (callback) {
+    callback(game_data,users);
   });
-  
   
 });
 
