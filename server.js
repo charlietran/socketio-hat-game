@@ -21,7 +21,7 @@ server.listen(process.env.PORT, function() {
 });
 
 
-var users=[];
+var users={};
 
 function broadcastUsers(users) {
   io.emit('list users', users);
@@ -39,11 +39,15 @@ io.on('connection', function (socket) {
 
   socket.on('new user', function(username){
     console.log('new user: ' + username);
-    users.push({
+    var user = {
       'ID'   : socket.userID, 
       'name' : username
-    });
-    io.emit('user joined', username);
+    };
+
+    users[user.ID]=user;
+
+    io.emit('user joined', user);
+    
     broadcastUsers(users);
   });
   

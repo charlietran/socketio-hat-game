@@ -6,7 +6,8 @@ console.log('hi');
 
 
 var socket = io();
-var username = '';
+var user={};
+
 
 $(function () {
 
@@ -15,10 +16,28 @@ $(function () {
   }
   var userID = document.cookie
   socket.emit('user connected', userID);
+
+  
+  socket.on('list users', function(users){
+    console.log(users);
+    if (users[userID]) {
+      user = users[userID];
+      $('form#new-user').hide();
+    }
+    
+    var content='';
+    for (var key in users) {
+      if (users.hasOwnProperty(key)) {
+             content+='<li>'+users[key].name+'</li>'; 
+      }
+    }
+    $('#users').html(content);
+  });
+
   
   $('form#new-user').submit(function(){
-    username = $('#u').val();
-    socket.emit('new user', username);
+    user.name = $('#u').val();
+    socket.emit('new user', user.name);
     $('form#new-user').hide();
     return false;
   });
@@ -26,7 +45,7 @@ $(function () {
   $('form#message').submit(function(){
     var msg={};
     msg.text=$('#m').val();
-    msg.user=username;
+    msg.user=user.name;
     socket.emit('chat message', msg);
     $('#m').val('');
     return false;
@@ -38,14 +57,6 @@ $(function () {
         append($('<li>').
         text(display));
     });
-  
-  socket.on('list users', function(users){
-    var content='';
-    users.forEach(function(user) {
-      content+='<li>'+user+'</li>';
-    })
-    $('#users').html(content);
-  });
   
   socket.on('begin game', function(){
     $('#messages').hide();
