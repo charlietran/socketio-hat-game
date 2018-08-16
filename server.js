@@ -27,7 +27,7 @@ var users={};
 function broadcastUsers(users) {
   io.emit('list users', users);
 }
-
+    var foo=1;
 var messages=[];
 function broadcastMessages(messages) {
   io.emit('display messages', messages);

@@ -16,6 +16,7 @@ function updateGameData(d,u){
   console.log(u);
   game_data=d;
   users=u;
+
   
   if (game_data.started){
     $('form#begin-game').hide();
@@ -24,8 +25,8 @@ function updateGameData(d,u){
     for (var key in users) {
       if (users.hasOwnProperty(key)) {
         var user_color=users[key].color;
-        if(users[key] != user.ID && user_color) {
-          if(user_color==0){
+        if((users[key].ID != user.ID) && user_color) {
+          if (user_color==0) {
               $(`li#user-${users[key].ID}`).addClass('black');
           } else if (user_color==1) {
               $(`li#user-${users[key].ID}`).addClass('white');
@@ -33,11 +34,17 @@ function updateGameData(d,u){
         }
       }
     }
+
     
   } else {
     $('form#begin-game').show();
     $('form#message').show();
 
+  }
+  
+  if(!user.ID) {
+    $('form#begin-game').hide();
+    $('form#message').hide();
   }
 }
 
