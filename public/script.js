@@ -7,7 +7,7 @@ console.log('hi');
 
 var socket = io();
 var user={};
-var users=[];
+var users={};
 var game_data={};
 
 function updateGameData(d,u){
@@ -16,6 +16,20 @@ function updateGameData(d,u){
   
   if (game_data.started){
     $('form#begin-game').hide();
+    
+    for (var key in users) {
+      if (users.hasOwnProperty(key)) {
+        var user_color=users[key].color;
+        if(users[key] != user.ID && user_color) {
+          if(user_color==0){
+              $(`li#user-${users[key].ID}`).addClass('black');
+          } else if (user_color==1) {
+              $(`li#user-${users[key].ID}`).addClass('white');
+          }
+        }
+      }
+    }
+    
   } else {
 
   }
@@ -29,6 +43,7 @@ $(function () {
   if (document.cookie == ''){
     document.cookie = btoa(Math.random()).substr(5,10);
   }
+  
   var userID = document.cookie
   
   socket.emit('user connected', userID, function(u){
@@ -66,7 +81,7 @@ $(function () {
     var content='';
     for (var key in users) {
       if (users.hasOwnProperty(key)) {
-             content+='<li>'+users[key].name+'</li>'; 
+             content+=`<li id="user-${users[key].ID}">${users[key].name}</li>`; 
       }
     }
     $('#users').html(content);

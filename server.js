@@ -36,8 +36,8 @@ function broadcastMessages(messages) {
   io.emit('display messages', messages);
 }
 
-function updateGameData(){
-  io.emit('game_update', d, u
+function broadcastGameData(){
+  io.emit('game_update', game_data, users);
 }
 
 function gameSetup(){
@@ -46,6 +46,7 @@ function gameSetup(){
         users[key].color = Math.floor( 2*Math.random() )
     }
   }
+  broadcastGameData()
 }
 
 io.on('connection', function (socket) {
