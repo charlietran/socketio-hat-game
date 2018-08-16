@@ -21,10 +21,7 @@ server.listen(process.env.PORT, function() {
 });
 
 
-var game_data={
-  started :false,
-  assignments : {}
-};
+var game_data={};
 
 var users={};
 function broadcastUsers(users) {

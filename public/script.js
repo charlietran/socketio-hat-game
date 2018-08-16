@@ -11,6 +11,9 @@ var users={};
 var game_data={};
 
 function updateGameData(d,u){
+  console.log('updateGameData');
+  console.log(d);
+  console.log(u);
   game_data=d;
   users=u;
   
@@ -35,16 +38,20 @@ function updateGameData(d,u){
   }
 }
 
+function getCookieValue(a) {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+}
+
 $(function () {
 
   $('#message_container').hide();
-  $('form#begin-game').hide();
   
-  if (document.cookie == ''){
-    document.cookie = btoa(Math.random()).substr(5,10);
+  if (getCookieValue("hatgame")==""){
+    document.cookie = "hatgame=" + btoa(Math.random()).substr(5,10);
   }
   
-  var userID = document.cookie
+  var userID = getCookieValue("hatgame");
   
   socket.emit('user connected', userID, function(u){
     console.log("received users");
@@ -53,7 +60,6 @@ $(function () {
     
     if (users[userID]) {
       $('#message_container').show();
-      $('form#begin-game').show();
     }
   });
   
