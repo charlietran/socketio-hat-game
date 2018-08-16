@@ -46,16 +46,22 @@ $(function () {
     var msg={};
     msg.text=$('#m').val();
     msg.user=user.name;
-    socket.emit('chat message', msg);
+    socket.emit('new message', msg);
     $('#m').val('');
     return false;
   });
   
-  socket.on('display message', function(msg){
-      var display=msg.user + ': ' + msg.text;
-      $('#messages').
-        append($('<li>').
-        text(display));
+  socket.on('display messages', function(messages){
+      var content='';
+      messages.forEach(function(message){
+        content+= '<li>' +
+                  message.user.name +
+                  ': ' + 
+                  message.text +
+                  '</li>'; 
+      });
+
+      $('#messages').html(content);
     });
   
   socket.on('begin game', function(){
@@ -70,4 +76,3 @@ $(function () {
   });
   
 });
-

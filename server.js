@@ -22,9 +22,13 @@ server.listen(process.env.PORT, function() {
 
 
 var users={};
-
 function broadcastUsers(users) {
   io.emit('list users', users);
+}
+
+var messages=[];
+function broadcastMessages(messages) {
+  io.emit('display messages', messages);
 }
 
 io.on('connection', function (socket) {
@@ -36,7 +40,8 @@ io.on('connection', function (socket) {
   
   
   broadcastUsers(users);
-
+  broadcastMessages(messages);
+  
   socket.on('new user', function(username){
     console.log('new user: ' + username);
     var user = {
@@ -51,9 +56,12 @@ io.on('connection', function (socket) {
     broadcastUsers(users);
   });
   
-  socket.on('chat message', function(msg){
-    //console.log('message: ' + msg.txt);
-    io.emit('display message', msg);
+  socket.on('new message', function(msg){
+    messages.push({
+      user: users[socket.userID],
+      text: msg.text
+    });
+    broadcastMessages(messages);
   });
 
   socket.on('begin game', function(){

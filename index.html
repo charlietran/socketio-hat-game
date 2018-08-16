@@ -13,6 +13,12 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="/script.js"></script>
+    <style>
+      #user_container {
+        float: right;
+        padding: 15px;
+      }
+    </style>
   </head>  
   <body>
     
@@ -23,16 +29,13 @@
       </button>
     </form>
     
-    <form id="message" action="">
-      <input id="m" autocomplete="off" />
-      <button>
-        Send
-      </button>
-    </form>
-    
-    <ul id="users">
-      
-    </ul>
+    <div id="user_container">
+      <strong>Users</strong>
+      <ul id="users">
+
+      </ul>      
+    </div>
+
     
     <form id="begin-game" action="">
       <button>
@@ -43,6 +46,16 @@
     <ul id="messages">
     
     </ul>
+    
+    <div id="message_container">
+      <strong>Chat</strong></stron>
+    </div>
+    <form id="message" action="">
+      <input id="m" autocomplete="off" />
+      <button>
+        Send
+      </button>
+    </form>
 
   </body>
 </html>
