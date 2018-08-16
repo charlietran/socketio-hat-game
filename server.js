@@ -23,7 +23,7 @@ server.listen(process.env.PORT, function() {
 
 var game_data={
   started :false,
-  assignments : []
+  assignments : {}
 };
 
 var users={};
@@ -38,12 +38,10 @@ function broadcastMessages(messages) {
 
 function gameSetup(){
   for (var key in users) {
-    if (users.hasOwnProperty(key)) {
-      if (key in
-      game_data.assignments.push({
-        'ID'    :  key,
-        'color' :  Math.floor( 2*Math.random() )
-      })
+    if (users.hasOwnProperty(key)){
+      if (!(key in game_data.assignments)){
+        game_data.assignments[key] = Math.floor( 2*Math.random() )
+      }
     }
   }
 }
