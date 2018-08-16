@@ -33,16 +33,17 @@ $(function () {
   var userID = document.cookie
   
   socket.emit('user connected', userID, function(u){
+    console.log("received users");
+    console.log(u);
     users=u;
+    
+    if (users[userID]) {
+      $('#message_container').show();
+      $('form#begin-game').show();
+    }
   });
   
-  console.log("user");
-  console.log(users[userID]);
-  
-  if (users[userID]) {
-    $('#message_container').show();
-    $('form#begin-game').show();
-  }
+
 
   socket.on('connect', function(){
     socket.emit('get_game_data', function(d,u){
