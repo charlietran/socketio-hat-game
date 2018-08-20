@@ -155,10 +155,9 @@ $(function () {
       var content='';
       
       messages.forEach(function(message){
-        console.log(message);
-        content+= '<li>' +
+        content+= '<li class="message-user">' +
                   message.user.name +
-                  ': ' + 
+                  '</li><li class="message-text">' + 
                   message.text +
                   '</li>'; 
       });
