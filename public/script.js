@@ -68,7 +68,6 @@ function updateGameData(d,u){
   if (game_data.started){
     $('form#begin-game').hide();
     $('form#message').hide();
-    $('form#new-game'
     
     updateUserList();
     
