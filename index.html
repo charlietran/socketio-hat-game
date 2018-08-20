@@ -57,6 +57,16 @@
         border: 1px solid #000;
       }
       
+      form#begin-game {
+        width: 100vw;
+      }
+      
+      #begin-game button {
+        width: 90%;
+        margin: auto;
+        display: block;
+      }
+      
       #guess_white{position:absolute; right: -120px; top:0;   display: block; width:100px; height: 20px; background: #fff; color: #000;}
       #guess_black{position:absolute; right: -120px; top:25px; display: block; width:100px; height: 20px; background: #000; color: #fff;}
       #guess_pass {position:absolute; right: -120px; top:50px; display: block; width:100px; height: 20px; background: #ccc; color: #000;}
@@ -70,23 +80,21 @@
       </button>
     </form>
     
-    <form id="begin-game" action="">
-      <button>
-        Begin Game
-      </button>
-    </form>
-
-    <br><br>
-    
     <div id="user-container">
-      <h1>Users</h1>
+      <h2>Users</h2>
       <ul id="users">
 
       </ul>      
     </div>
     
+    <form id="begin-game" action="">
+      <button class="button button-outline">
+        Begin Game
+      </button>
+    </form>
+    
     <div id="message-container">
-      <strong>Chat</strong>   
+      <h2>Chat</h2>   
       <form id="message" action="">
         <input id="m" autocomplete="off" />
         <button>
