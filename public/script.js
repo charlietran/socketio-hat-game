@@ -15,9 +15,9 @@ function updateUserList() {
   for (var key in users) {
     if (users.hasOwnProperty(key)) {
       var cardcontent='';
-      var box1content='';
-      var box2content='';
-      var box3content='';
+      var box1html='';
+      var box2html='';
+      var box3html='';
       var color_class="";
       if(users[key].color==0) {
         color_class='black';
@@ -28,12 +28,15 @@ function updateUserList() {
       if(game_data.started) {
         if (key==user.ID) {
           cardcontent='YOU';
-          box1content='guess white';
-          box2content='guess black';
-          box3content='pass';
+          box1html='<li class="user-box user-box-1 guess-white">guess white</li>';
+          box2html='<li class="user-box user-box-2 guess-black">guess black</li>';
+          box3html='<li class="user-box user-box-3 guess-pass">guess pass</li>';
           color_class='';
         } else {
           cardcontent=users[key].name;
+          box1html='<li class="user-box user-box-1 guess-white"></li>';
+          box2html='<li class="user-box user-box-2 guess-black"></li>';
+          box3html='<li class="user-box user-box-3 guess-"></li>';
         }
       } else {
         cardcontent=users[key].name;
@@ -50,6 +53,8 @@ function updateUserList() {
 
   }
   $('#users').html(content);
+  
+  
 }
 
 function updateGameData(d,u){
