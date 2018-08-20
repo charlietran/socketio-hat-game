@@ -12,35 +12,41 @@ var game_data={};
 
 function updateUserList() {
   var content='';
-  var cardcontent='';
-  var box1content='';
-  var box2content='';
-  var box3content='';
   for (var key in users) {
     if (users.hasOwnProperty(key)) {
-      var klass="";
+      var cardcontent='';
+      var box1content='';
+      var box2content='';
+      var box3content='';
+      var color_class="";
       if(users[key].color==0) {
-        klass='black';
+        color_class='black';
       } else if (users[key].color==1) {
-        klass='white';
+        color_class='white';
       }
       
-      if (game_data.started && key==user.ID) {
+      if(game_data.started) {
+        if (key==user.ID) {
+          cardcontent='YOU';
+          box1content='guess white';
+          box2content='guess black';
+          box3content='pass';
+          color_class='';
+        } else {
+          cardcontent=users[key].name;
+        }
+      } else {
         cardcontent=users[key].name;
-        box1content='guess white';
-        box2content='guess black';
-        box3content='pass';
-      }
-      
+      } // if(game_data.started)
       
       
       content+=`
-        <li class="user-card" id="user-${users[key].ID}">${cardcontent}</li>
-        <li class="user-box-1">${box1content}</li>
-        <li class="user-box-2">${box2content}</li>
-        <li class="user-box-3">${box3content}</li>`;
+        <li class="user-card ${color_class}" id="user-${users[key].ID}">${cardcontent}</li>
+        <li class="user-box user-box-1">${box1content}</li>
+        <li class="user-box user-box-2">${box2content}</li>
+        <li class="user-box user-box-3">${box3content}</li>`;
     
-    }
+    } // for (var key in users)
 
   }
   $('#users').html(content);
