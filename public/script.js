@@ -12,6 +12,10 @@ var game_data={};
 
 function updateUserList() {
   var content='';
+  var cardcontent='';
+  var box1content='';
+  var box2content='';
+  var box3content='';
   for (var key in users) {
     if (users.hasOwnProperty(key)) {
       var klass="";
@@ -22,10 +26,20 @@ function updateUserList() {
       }
       
       if (game_data.started && key==user.ID) {
-        content+=`<li id="user-${users[key].ID}">${users[key].name}<a id="guess_white" href="#">guess white</a><a id="guess_black" href="#">guess black</a><a id="guess_pass" href="#">pass</a></li>`; 
-      } else {
-        content+=`<li class="${klass}" id="user-${users[key].ID}">${users[key].name}</li>`; 
+        cardcontent=users[key].name;
+        box1content='guess white';
+        box2content='guess black';
+        box3content='pass';
       }
+      
+      
+      
+      content+=`
+        <li class="user-card" id="user-${users[key].ID}">${cardcontent}</li>
+        <li class="user-box-1">${box1content}</li>
+        <li class="user-box-2">${box2content}</li>
+        <li class="user-box-3">${box3content}</li>`;
+    
     }
 
   }
