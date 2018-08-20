@@ -30,13 +30,13 @@ function updateUserList() {
           cardcontent='YOU';
           box1html='<li class="user-box user-box-1 guess-white">guess white</li>';
           box2html='<li class="user-box user-box-2 guess-black">guess black</li>';
-          box3html='<li class="user-box user-box-3 guess-pass">guess pass</li>';
+          box3html='<li class="user-box user-box-3 guess-pass">pass</li>';
           color_class='';
         } else {
           cardcontent=users[key].name;
-          box1html='<li class="user-box user-box-1 guess-white"></li>';
-          box2html='<li class="user-box user-box-2 guess-black"></li>';
-          box3html='<li class="user-box user-box-3 guess-"></li>';
+          box1html='<li class="user-box user-box-1"></li>';
+          box2html='<li class="user-box user-box-2"></li>';
+          box3html='<li class="user-box user-box-3"></li>';
         }
       } else {
         cardcontent=users[key].name;
@@ -44,16 +44,16 @@ function updateUserList() {
       
       
       content+=`
-        <li class="user-card ${color_class}" id="user-${users[key].ID}">${cardcontent}</li>
-        <li class="user-box user-box-1">${box1content}</li>
-        <li class="user-box user-box-2">${box2content}</li>
-        <li class="user-box user-box-3">${box3content}</li>`;
+        <li class="user-card ${color_class}" id="user-${users[key].ID}">${cardcontent}</li>${box1html}${box2html}${box3html}`;
     
     } // for (var key in users)
 
   }
   $('#users').html(content);
   
+  $('.guess-white').click(function(){
+    console.log('guessed white')
+  });
   
 }
 
