@@ -22,7 +22,7 @@ function updateUserList() {
         if (key==user.ID) {
           cardcontent='YOU';
           if (user.guessed) {
-            
+            console.log('user guessed')
           } else {
             box1html='<li class="user-box user-box-1 guess-white">guess white</li>';
             box2html='<li class="user-box user-box-2 guess-black">guess black</li>';
@@ -59,7 +59,7 @@ function updateUserList() {
 }
 
 function makeGuess(user, color) {
-  $('.user-box').html('')
+//  $('.user-box').html('')
   socket.emit('user_guess', user, color);
 }
 
@@ -69,7 +69,7 @@ function updateGameData(d,u){
   console.log(u);
   game_data=d;
   users=u;
-
+  user = users.
   
   if (game_data.started){
     $('form#begin-game').hide();
