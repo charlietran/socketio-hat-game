@@ -1,10 +1,3 @@
-/* If you're feeling fancy you can add interactivity 
-    to your site with Javascript */
-
-// prints "hi" in the browser's dev tools console
-console.log('hi');
-
-
 var socket = io();
 var user={};
 var users={};
@@ -90,7 +83,9 @@ function updateGameData(d,u){
 
     if (game_data.gameOver) {
       if (game_data.won) {
-        $('#result h1').innerText = "You all won!"
+        $('#result h1').innerText = "You all won! :D"
+      } else {
+        $('#result h1').innerText = "Oh no! You lost :("
       }
     }    
   } else {
@@ -118,8 +113,6 @@ $(function () {
   var userID = getCookieValue("hatgame");
   
   socket.emit('user connected', userID, function(u){
-    console.log("received users");
-    console.log(u);
     users=u;
 
   });

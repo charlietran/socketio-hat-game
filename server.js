@@ -95,11 +95,16 @@ io.on('connection', function (socket) {
   });
   
   socket.on('user_guess', function(user, guess_color) {
-    gameData.guesses.push({
+    var newGuess = {
       user: users[user.id],
       color: guess_color
-    });
-    checkGuesses();
+    }
+    if (!gameData.guesses.includes(newGuess)) {
+      gameData.guesses.push(newGuess);
+      checkGuesses();
+    } else {
+      console.log('You already guessed');
+    }
   });
   
 });
