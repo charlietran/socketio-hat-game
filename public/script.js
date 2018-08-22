@@ -88,7 +88,11 @@ function updateGameData(d,u){
       }
     }
 
-    
+    if (game_data.gameOver) {
+      if (game_data.won) {
+        $('#result h1').innerText = "You all won!"
+      }
+    }    
   } else {
     $('form#begin-game').show();
     $('form#message').show();
@@ -98,7 +102,6 @@ function updateGameData(d,u){
     $('form#begin-game').hide();
     $('form#message').hide();
   }
-
 }
 
 function getCookieValue(a) {
