@@ -1,5 +1,5 @@
 var socket = io();
-var user={};
+var currUser={};
 var users={};
 var game_data={};
 
@@ -19,9 +19,9 @@ function updateUserList() {
       }
       
       if(game_data.started) {
-        if (key==user.ID) {
+        if (key==currUser.ID) {
           cardcontent='YOU';
-          if (user.guessed) {
+          if (currUser.guessed) {
             console.log('user guessed')
           } else {
             box1html='<li class="user-box user-box-1 guess-white">guess white</li>';
@@ -42,17 +42,17 @@ function updateUserList() {
   $('#users').html(content);
   
   $('.guess-white').click(function(){
-    makeGuess(user, 1)
+    makeGuess(currUser, 1)
     console.log('guessed white')
   });
   
   $('.guess-black').click(function(){
-    makeGuess(user, 0)
+    makeGuess(currUser, 0)
     console.log('guessed black')
   });
   
   $('.guess-pass').click(function(){
-    makeGuess(user, 2)
+    makeGuess(currUser, 2)
     console.log('passed')
   });
   
@@ -69,7 +69,9 @@ function updateGameData(d,u){
   console.log(u);
   game_data=d;
   users=u;
-  user = users.
+  if (currUser.ID) {
+    currUser = users[currUser.ID]
+  }
   
   if (game_data.started){
     $('form#begin-game').hide();
@@ -80,7 +82,7 @@ function updateGameData(d,u){
     for (var key in users) {
       if (users.hasOwnProperty(key)) {
         var user_color=users[key].color;
-        if((users[key].ID != user.ID) && user_color != undefined) {
+        if((users[key].ID != currUser.ID) && user_color != undefined) {
           if (user_color==0) {
               $(`li#user-${users[key].ID}`).addClass('black');
           } else if (user_color==1) {
@@ -102,7 +104,7 @@ function updateGameData(d,u){
     $('form#message').show();
   }
   
-  if(!user.ID) {
+  if(!currUser.ID) {
     $('form#begin-game').hide();
     $('form#message').hide();
   }
@@ -141,7 +143,7 @@ $(function () {
     users=u;
     
     if (users[userID]) {
-      user = users[userID];
+      currUser = users[userID];
       $('form#new-user').hide();
       $('form#begin-game').show();
       $('form#message').show();
@@ -151,15 +153,15 @@ $(function () {
   });
   
   $('form#new-user').submit(function(){
-    user.name = $('#u').val();
-    socket.emit('new user', user.name);
+    currUser.name = $('#u').val();
+    socket.emit('new user', currUser.name);
     return false;
   });
   
   $('form#message').submit(function(){
     var msg={};
     msg.text=$('#m').val();
-    msg.user=user.name;
+    msg.user=currUser.name;
     socket.emit('new message', msg);
     $('#m').val('');
     return false;
