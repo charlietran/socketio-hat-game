@@ -96,10 +96,11 @@ io.on('connection', function (socket) {
   
   socket.on('user_guess', function(user, guess_color) {
     var newGuess = {
-      user: users[user.id],
+      user: users[user.ID],
       color: guess_color
     }
     if (!gameData.guesses.includes(newGuess)) {
+      newGuess.user.guessed = true;
       gameData.guesses.push(newGuess);
       checkGuesses();
     } else {

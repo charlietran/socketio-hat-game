@@ -21,9 +21,13 @@ function updateUserList() {
       if(game_data.started) {
         if (key==user.ID) {
           cardcontent='YOU';
-          box1html='<li class="user-box user-box-1 guess-white">guess white</li>';
-          box2html='<li class="user-box user-box-2 guess-black">guess black</li>';
-          box3html='<li class="user-box user-box-3 guess-pass">pass</li>';
+          if (user.guessed) {
+            
+          } else {
+            box1html='<li class="user-box user-box-1 guess-white">guess white</li>';
+            box2html='<li class="user-box user-box-2 guess-black">guess black</li>';
+            box3html='<li class="user-box user-box-3 guess-pass">pass</li>';
+          }
           color_class='';
         }
       }
