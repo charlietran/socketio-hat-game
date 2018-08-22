@@ -92,9 +92,9 @@ function updateGameData(d,u){
 
     if (game_data.gameOver) {
       if (game_data.won) {
-        $('#result h1').innerText = "You all won! :D"
+        $('#result h1').html("You all won! :D")
       } else {
-        $('#result h1').innerText = "Oh no! You lost :("
+        $('#result h1').html("Oh no! You lost :(")
       }
     }    
   } else {

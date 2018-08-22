@@ -99,13 +99,14 @@ io.on('connection', function (socket) {
       user: users[user.ID],
       color: guess_color
     }
-    if (!gameData.guesses.includes(newGuess)) {
+    if (!newGuess.user.guessed) {
       newGuess.user.guessed = true;
       gameData.guesses.push(newGuess);
       checkGuesses();
     } else {
       console.log('You already guessed');
     }
+    broadcastGameData()
   });
   
 });
