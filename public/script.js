@@ -38,20 +38,25 @@ function updateUserList() {
   $('#users').html(content);
   
   $('.guess-white').click(function(){
-    socket.emit('user_guess', user, 1);
+    makeGuess(user, 1)
     console.log('guessed white')
   });
   
   $('.guess-black').click(function(){
-    socket.emit('user_guess', user, 0);
+    makeGuess(user, 0)
     console.log('guessed black')
   });
   
   $('.guess-pass').click(function(){
-    socket.emit('user_guess', user, 2);
+    makeGuess(user, 2)
     console.log('passed')
   });
   
+}
+
+function makeGuess(user, color) {
+  $('.user-box').html('')
+  socket.emit('user_guess', user, color);
 }
 
 function updateGameData(d,u){

@@ -111,7 +111,7 @@ io.on('connection', function (socket) {
 
 function checkGuesses() {
   // check guesses length
-  if (gameData.guesses.length == users.length) {
+  if (gameData.guesses.length == Object.keys(users).length) {
     gameOver();
   } 
   broadcastGameData();
