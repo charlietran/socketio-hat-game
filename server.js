@@ -88,5 +88,9 @@ io.on('connection', function (socket) {
     broadcastGameData()
   });
   
+  socket.on('user_guess', function(user, guess) {
+     
+  });
+  
 });
 
