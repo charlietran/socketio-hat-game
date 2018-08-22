@@ -94,10 +94,10 @@ io.on('connection', function (socket) {
     broadcastGameData()
   });
   
-  socket.on('user_guess', function(user, guess) {
+  socket.on('user_guess', function(user, guess_color) {
     gameData.guesses.push({
-      user_id: user.id,
-      guess: guess
+      user: users[user.id],
+      color: guess_color
     });
     checkGuesses();
   });
@@ -110,7 +110,6 @@ function checkGuesses() {
     gameOver();
   } 
   broadcastGameData();
-  
 }
 
 function gameOver() {
@@ -120,9 +119,24 @@ function gameOver() {
 
 function checkGameWon() {
   gameData.correctGuesses=0;
-  gameData.passes
+  gameData.passes=0;
+  gameData.wrongGuesses=0;
+  
   gameData.guesses.forEach(function(guess){
-      
+    if (guess.color == guess.user.color) {
+      gameData.correctGuesses += 1;
+    } else if (guess.color == PASS) {
+      gameData.passes += 1;
+    } else {
+      gameData.wrongGuesses += 1;
+    }
   });
-  return false;
+  
+  if (gameData.wrongGuesses > 0 || gameData.correctGuesses==0) {
+    return false;
+  } else {
+    return true;
+  }
+  // Easier game:
+  // return (gameData.correctGuesses > gameData.wrongGuesses);
 }
