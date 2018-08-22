@@ -8,6 +8,10 @@ var http = require('http');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
+var BLACK=0;
+var WHITE=1;
+var PASS=2;
+
 app.use(express.static('public'));
 
 app.get('/', function(request, response) {
@@ -21,7 +25,9 @@ server.listen(process.env.PORT, function() {
 });
 
 
-var game_data={};
+var gameData={
+  guesses: []
+};
 
 var users={};
 function broadcastUsers(users) {
@@ -34,7 +40,7 @@ function broadcastMessages(messages) {
 }
 
 function broadcastGameData(){
-  io.emit('game_update', game_data, users);
+  io.emit('game_update', gameData, users);
 }
 
 function gameSetup(){
@@ -79,7 +85,7 @@ io.on('connection', function (socket) {
 
   socket.on('begin game', function(){
     io.emit('begin game');
-    game_data.started=true;
+    gameData.started=true;
     gameSetup()
     console.log( users )
   });
@@ -89,8 +95,34 @@ io.on('connection', function (socket) {
   });
   
   socket.on('user_guess', function(user, guess) {
-     
+    gameData.guesses.push({
+      user_id: user.id,
+      guess: guess
+    });
+    checkGuesses();
   });
   
 });
 
+function checkGuesses() {
+  // check guesses length
+  if (gameData.guesses.length == users.length) {
+    gameOver();
+  } 
+  broadcastGameData();
+  
+}
+
+function gameOver() {
+  gameData.gameOver = true;
+  gameData.won = checkGameWon();
+}
+
+function checkGameWon() {
+  gameData.correctGuesses=0;
+  gameData.passes
+  gameData.guesses.forEach(function(guess){
+      
+  });
+  return false;
+}
