@@ -27,13 +27,13 @@ function updateUserList() {
             var guess_text = ''
             if (game_data.guesses[guess_index].color == 0) {
               guess_color = 'black';
-              guess_text = 'you guessed black :)';
+              guess_text = 'guessed black :)';
             } else if (game_data.guesses[guess_index].color == 1) {
               guess_color = 'white';
-              guess_text = 'you guessed white :]';
+              guess_text = 'guessed white :)';
             } else {
               guess_color = 'pass';
-              guess_text = 'you passed :|';
+              guess_text = 'passed :|';
             }
             console.log('user guessed')
             box1html=`<li class="user-box user-box-1 guess-${guess_color} inactive">${guess_text}</li>`
@@ -44,6 +44,26 @@ function updateUserList() {
           }
           color_class='';
         }
+      }
+      
+      if(game_data.gameOver) {
+        if (key==currUser.ID) {
+          cardcontent='YOU';
+        }
+        var guess_index = Object.keys(game_data.guesses).find(k => game_data.guesses[k].user.ID === key)
+        var guess_color = '';
+        var guess_text = ''
+        if (game_data.guesses[guess_index].color == 0) {
+          guess_color = 'black';
+          guess_text = 'guessed black :)';
+        } else if (game_data.guesses[guess_index].color == 1) {
+          guess_color = 'white';
+          guess_text = 'guessed white :]';
+        } else {
+          guess_color = 'pass';
+          guess_text = 'passed :|';
+        }
+        box1html=`<li class="user-box user-box-1 guess-${guess_color} inactive">${guess_text}</li>`
       }
       
       
@@ -204,6 +224,7 @@ $(function () {
   
   $('form#reset-game').submit(function(){
     socket.emit('reset game');
+    location.reload()
     return false
   });
 
