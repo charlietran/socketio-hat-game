@@ -23,12 +23,20 @@ function updateUserList() {
           cardcontent='YOU';
           if (currUser.guessed) {
             var guess_index = Object.keys(game_data.guesses).find(k => game_data.guesses[k].user.ID === key)
-            var guess_color = ''
-            if game_data.guesses[guess_index].color == 0
+            var guess_color = '';
+            var guess_text = ''
+            if (game_data.guesses[guess_index].color == 0) {
+              guess_color = 'black';
+              guess_text = 'you guessed black :)';
+            } else if (game_data.guesses[guess_index].color == 1) {
+              guess_color = 'white';
+              guess_text = 'you guessed white :]';
+            } else {
+              guess_color = 'pass';
+              guess_text = 'you passed :|';
+            }
             console.log('user guessed')
-            box1html=`<li class="user-box user-box-1 guess-
-                      ${game_data.guesses[guess_index].color}">
-                      you guessed ${game_data.guesses[guess_index].color}!</li>`
+            box1html=`<li class="user-box user-box-1 guess-${guess_color} inactive">${guess_text}</li>`
           } else {
             box1html='<li class="user-box user-box-1 guess-white">guess white</li>';
             box2html='<li class="user-box user-box-2 guess-black">guess black</li>';
