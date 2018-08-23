@@ -16,14 +16,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="/script.js"></script>
     <style>
-      #user-container, #result, #rules-container, #message-container {
+      body {
         padding: 15px;
-        max-width: 500px;
+        max-width: 600px;
       }
       
       ul#users{
         display: grid;
-        max-width: 500px;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(1, 1fr);
       }
@@ -73,7 +72,7 @@
       }
       
       form#begin-game {
-        width: 100vw;
+        width: 100%;
       }
       
       #begin-game button {
@@ -127,12 +126,26 @@
         color: #fff;
       }
       
+      h1 {
+        text-align: center;
+      }
+      
+      #rules-container {
+        font-size:.8em;
+      }
+      
       #guess_white{position:absolute; right: -120px; top:0;   display: block; width:100px; height: 20px; background: #fff; color: #000;}
       #guess_black{position:absolute; right: -120px; top:25px; display: block; width:100px; height: 20px; background: #000; color: #fff;}
       #guess_pass {position:absolute; right: -120px; top:50px; display: block; width:100px; height: 20px; background: #ccc; color: #000;}
     </style>
   </head>  
   <body>
+    <h1>
+      The Hat Game!
+    </h1>
+    
+    <a href="#rules-container">Rules</a>
+
     
     <div id="user-container">
       <h2>Users</h2>
@@ -179,8 +192,8 @@
       <p>
         In the hat game, every player is given a hat that is either white or black 
         (each with probability 1/2).  The players can see the color of hat of all
-        other players, but cannot see their own.  Each player is allowed to guess
-        their own hat color or pass without guessing.
+        of the other players, but cannot see their own.  Each player is allowed to 
+        guess their own hat color or pass without guessing.
       </p>
       <p>
         The game is over when all players have either guessed or passed.  As a team, 
