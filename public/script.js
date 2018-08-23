@@ -27,13 +27,13 @@ function updateUserList() {
             var guess_text = ''
             if (game_data.guesses[guess_index].color == 0) {
               guess_color = 'black';
-              guess_text = 'guessed black :)';
+              guess_text = 'guessed black';
             } else if (game_data.guesses[guess_index].color == 1) {
               guess_color = 'white';
-              guess_text = 'guessed white :)';
+              guess_text = 'guessed white';
             } else {
               guess_color = 'pass';
-              guess_text = 'passed :|';
+              guess_text = 'passed';
             }
             console.log('user guessed')
             box1html=`<li class="user-box user-box-1 guess-${guess_color} inactive">${guess_text}</li>`
@@ -56,13 +56,13 @@ function updateUserList() {
 
         if (game_data.guesses[guess_index].color == 0) {
           guess_color = 'black';
-          guess_text = 'guessed black :)';
+          guess_text = 'guessed black';
         } else if (game_data.guesses[guess_index].color == 1) {
           guess_color = 'white';
-          guess_text = 'guessed white :]';
+          guess_text = 'guessed white';
         } else {
           guess_color = 'pass';
-          guess_text = 'passed :|';
+          guess_text = 'passed';
         }
         box1html=`<li class="user-box user-box-1 guess-${guess_color} inactive">${guess_text}</li>`
         var guessed_correctly= users[key].color == game_data.guesses[guess_index].color;
