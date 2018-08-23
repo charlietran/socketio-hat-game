@@ -16,8 +16,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="/script.js"></script>
     <style>
-      #user-container, #result {
+      #user-container, #result, #rules-container, #message-container {
         padding: 15px;
+        max-width: 500px;
       }
       
       ul#users{
@@ -63,11 +64,6 @@
       #users li.white {
         background: #fff;
         color: #000;
-      }
-      
-      
-      #message-container {
-        padding: 15px;
       }
       
       #users li a {
@@ -145,7 +141,7 @@
       </ul>
       
       <form id="new-user">
-        <input id="u" autocomplete="off" />
+        <input id="u" autocomplete="off" /><br />
         <button class="button">
           Join
         </button>
@@ -174,6 +170,29 @@
       <ul id="messages">
     
       </ul>
+    </div>
+    
+    <div id="rules-container">
+      <h2>
+        Rules
+      </h2>
+      <p>
+        In the hat game, every player is given a hat that is either white or black 
+        (each with probability 1/2).  The players can see the color of hat of all
+        other players, but cannot see their own.  Each player is allowed to guess
+        their own hat color or pass without guessing.
+      </p>
+      <p>
+        The game is over when all players have either guessed or passed.  As a team, 
+        you lose the game if everyone passes; 
+        you lose the game if there is any wrong guesses; and
+        you win the game otherwise.  In other words, the only way to win the game
+        is for at least one player to guess right with no players guessing wrong.
+      </p>
+      <p>
+        You may communicate/strategize as a team before the game begins, but 
+        no communication is allowed after the game has begun.  Good luck!!
+      </p>
     </div>
 
   </body>
