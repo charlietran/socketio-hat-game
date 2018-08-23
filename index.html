@@ -138,6 +138,26 @@
         font-size:.8em;
       }
       
+      .guess-result {
+        width: 10vw;
+        font-size: 2vw;
+        font-weight: bold;
+        text-align: center;
+        font-family: monospace;
+      }
+      
+      .guess-result.correct {
+        color: green;
+      }
+      
+      .guess-result.wrong {
+        color: red;
+      }
+      
+      .guess-result.pass {
+        color: #ccc;
+      }
+      
       #guess_white{position:absolute; right: -120px; top:0;   display: block; width:100px; height: 20px; background: #fff; color: #000;}
       #guess_black{position:absolute; right: -120px; top:25px; display: block; width:100px; height: 20px; background: #000; color: #fff;}
       #guess_pass {position:absolute; right: -120px; top:50px; display: block; width:100px; height: 20px; background: #ccc; color: #000;}

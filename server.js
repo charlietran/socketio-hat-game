@@ -114,7 +114,8 @@ io.on('connection', function (socket) {
       guesses: []
     };
     users={};
-    broadcastGameData() 
+    broadcastGameData()
+    io.emit('reset game')
   });
 });
 

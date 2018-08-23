@@ -53,6 +53,7 @@ function updateUserList() {
         var guess_index = Object.keys(game_data.guesses).find(k => game_data.guesses[k].user.ID === key)
         var guess_color = '';
         var guess_text = ''
+
         if (game_data.guesses[guess_index].color == 0) {
           guess_color = 'black';
           guess_text = 'guessed black :)';
@@ -64,6 +65,24 @@ function updateUserList() {
           guess_text = 'passed :|';
         }
         box1html=`<li class="user-box user-box-1 guess-${guess_color} inactive">${guess_text}</li>`
+        var guessed_correctly= users[key].color == game_data.guesses[guess_index].color;
+        var passed = game_data.guesses[guess_index].color == 2;
+        
+        var guess_result="";
+        var guess_class="";
+        if (passed) {
+          guess_result = "¯\\_(ツ)_/¯";
+          guess_class = "pass";
+        } else if(guessed_correctly) {
+          guess_result = "(｡◕‿◕｡)";
+          guess_class = "correct";
+        }
+        else {
+          guess_result = "ლ(｀ー´ლ)";
+          guess_class = "wrong";
+        }
+
+        box2html=`<li class="user-box user-box-2 inactive guess-result ${guess_class}">${guess_result}</li>`
       }
       
       
@@ -140,7 +159,7 @@ function updateGameData(d,u){
     $('form#message').show();
   }
   
-  if(!currUser.ID) {
+  if(!currUser || !currUser.ID) {
     $('form#begin-game').hide();
     $('form#message').hide();
   }
@@ -224,8 +243,11 @@ $(function () {
   
   $('form#reset-game').submit(function(){
     socket.emit('reset game');
-    location.reload()
     return false
+  });
+  
+  socket.on('reset game', function() {
+    location.reload() 
   });
 
 });
