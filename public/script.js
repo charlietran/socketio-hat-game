@@ -107,6 +107,7 @@ function updateGameData(d,u){
     }
 
     if (game_data.gameOver) {
+      $('form#reset-game').show();
       if (game_data.won) {
         $('#result h1').html("You all won! :D")
       } else {
@@ -114,6 +115,7 @@ function updateGameData(d,u){
       }
     }    
   } else {
+    $('form#reset-game').hide();
     $('form#begin-game').show();
     $('form#message').show();
   }
@@ -198,6 +200,11 @@ $(function () {
   $('form#begin-game').submit(function(){
     socket.emit('begin game');
     return false;
+  });
+  
+  $('form#reset-game').submit(function(){
+    socket.emit('reset game');
+    return false
   });
 
 });

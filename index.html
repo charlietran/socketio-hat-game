@@ -71,11 +71,11 @@
         border: 1px solid #000;
       }
       
-      form#begin-game {
+      form .full-width {
         width: 100%;
       }
       
-      #begin-game button {
+      button .full-width {
         width: 90%;
         margin: auto;
         display: block;
@@ -163,7 +163,7 @@
     </div>
     
     <form id="begin-game" action="">
-      <button class="button button-outline">
+      <button class="button button-outline full-width">
         Begin Game
       </button>
     </form>
@@ -172,6 +172,12 @@
       <h1>
       </h1>
     </div>
+    
+    <form id="reset-game" action="">
+      <button class="button button-outline full-width">
+        Reset Game
+      </button>
+    </form>
     
     <div id="message-container">
       <h2>Chat</h2>   

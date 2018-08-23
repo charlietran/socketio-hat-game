@@ -109,6 +109,13 @@ io.on('connection', function (socket) {
     broadcastGameData()
   });
   
+  socket.on('reset game', function() {
+    gameData={
+      guesses: []
+    };
+    users={};
+    broadcastGameData() 
+  });
 });
 
 function checkGuesses() {
