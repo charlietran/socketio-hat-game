@@ -22,11 +22,13 @@ function updateUserList() {
         if (key==currUser.ID) {
           cardcontent='YOU';
           if (currUser.guessed) {
-            Object.keys(game_data.guesses).find(k => game_data.guesses[k].user.ID === {key
+            var guess_index = Object.keys(game_data.guesses).find(k => game_data.guesses[k].user.ID === key)
+            var guess_color = ''
+            if game_data.guesses[guess_index].color == 0
             console.log('user guessed')
             box1html=`<li class="user-box user-box-1 guess-
-                      ${game_data.guesses[key].color}>
-                      you guessed ${game_data.guesses[key].color}!</li>`
+                      ${game_data.guesses[guess_index].color}">
+                      you guessed ${game_data.guesses[guess_index].color}!</li>`
           } else {
             box1html='<li class="user-box user-box-1 guess-white">guess white</li>';
             box2html='<li class="user-box user-box-2 guess-black">guess black</li>';
