@@ -23,6 +23,7 @@ function updateUserList() {
           cardcontent='YOU';
           if (currUser.guessed) {
             console.log('user guessed')
+            box1html=`<li class="user-box user-box-1 guess-${game_data.guesses.currUser.
           } else {
             box1html='<li class="user-box user-box-1 guess-white">guess white</li>';
             box2html='<li class="user-box user-box-2 guess-black">guess black</li>';
